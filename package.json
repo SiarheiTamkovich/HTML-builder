@@ -2,8 +2,10 @@
   "name": "html-builder",
   "version": "1.0.0",
   "description": "html-builder task for RSSchool",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "01-read-file": "01-read-file/index.js"
   },
   "author": "evgeniimal",
   "license": "ISC",
