@@ -54,7 +54,6 @@ fs.readFile(`06-build-page/template.html`, `utf-8`, (err, data) => {
 
 fs.readdir(folderHtml, (err, files) => {
 //     console.error(err)
-//     console.log(files)
     files.forEach(file => {
         let name = file.replace(/.html/g, ``);
  //     console.log(name);
@@ -82,6 +81,14 @@ fs.readdir(folderHtml, (err, files) => {
                 }
                 content = content.replace(/{{header}}/g, data);
             })
+        } else if (name === `about`) {
+            fs.readFile(`${folderHtml}/about.html`, `utf-8`, (err, data) => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                content = content.replace(/{{about}}/g, data);
+            })
         }
     });
 });
@@ -101,7 +108,6 @@ setTimeout( () => {
 
 fs.readdir(folderStyle, (err, files) => {
 //     console.error(err)
-//     console.log(files)
        files.forEach(file => {
            let re = /^(?:.*\.(?=(htm|html|css|js)$))?[^.]*$/i
            let ext = file.replace().match(re);
@@ -122,8 +128,6 @@ fs.readdir(folderStyle, (err, files) => {
 
 setTimeout( () => {
     let content = arrStyle.join(`\n\n`);
-//    console.log(content);
-//    console.log(arrFiles)
     writeStyle(content);
     },
   2000
@@ -154,7 +158,6 @@ function writeStyle(content){
                 }
                 console.log(`Файл ${folderDist}/style.css успешно перезаписан`)
             })
-        
         }
     });
 }
@@ -182,7 +185,6 @@ copyDir(`06-build-page/assets/svg`, `${folderDist}/assets/svg`);
 function copyDir(folder, folderNew){
     fs.readdir(folder, (err, files) => {
  //       console.log(err)
- //         console.log(files);   
           files.forEach(file => {
  //           console.log(file);           
             fs.copyFile(`${folder}/${file}`, `${folderNew}/${file}`, (err) => {
